@@ -2,7 +2,8 @@
 import abbr as a
 import urllib.parse, urllib.request, urllib.error
 import xml.etree.ElementTree as ET
-import requests
+import json
+from requests import Session
 
 
 series = None
@@ -26,8 +27,21 @@ class My_Manager:
 
     def get_data(self):
         url = a.MAIN_PART
-        path ='{}series={}&startDate={}&endDate={}&type=xml&key={}&aggregationTypes={}&Formulas={}&Frequency={}'.format(url,self.series,self.startDate,self.endDate,a.API_KEY,self.aggregationTypes,self.formulas,self.frequency)
+        path ='{}series={}&startDate={}&endDate={}&type=json&key={}&aggregationTypes={}&Formulas={}&Frequency={}'.format(url,self.series,self.startDate,self.endDate,a.API_KEY,self.aggregationTypes,self.formulas,self.frequency)
+        
         url_to_open = urllib.request.urlopen(path).read()
+        data = json.loads(url_to_open)
+        #if url_to_open.ok:
+        #    pass
+        #else:
+        #    if url_to_open.status_code == 400:
+        #        pass
+        #    else:
+        #        raise ConnectionError
+        
+        
+        
+        #url_to_open = urllib.request.urlopen(path).read()
         #tree = ET.fromstring(url_to_open)
         
         
@@ -35,4 +49,4 @@ class My_Manager:
         #tree = ET.parse(url_to_open)
         #root_node = tree.getroot()
         #lst = root_node.findall('TP_DK_USD_A_YTL')  
-        return url_to_open
+        return data
