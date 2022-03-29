@@ -1,8 +1,9 @@
-from ast import Pass
-from configparser import NoOptionError
+
 import abbr as a
-from requests import Session
-import xml.etree.ElementTree as et
+import urllib.parse, urllib.request, urllib.error
+import xml.etree.ElementTree as ET
+import requests
+
 
 series = None
 startDate = None
@@ -23,35 +24,15 @@ class My_Manager:
         
 
 
-    def get_crypto_prices(self):
-        output = {}
+    def get_data(self):
         url = a.MAIN_PART
-        parameters = {
-            'series':self.series,
-            'key': a.API_KEY,
-            'startDate' :self.startDate,
-            'endDate': self.endDate,
-            'type': 'xml',
-            'aggregationTypes':self.aggregationTypes,
-            'Formulas': self.formulas,
-            'Frequency': self.frequency,
-        }
-        headers = {
-            'Accepts': 'application/xml',
-           
-        }
-
-        session = Session()
-        session.headers.update(headers)
-        response = session.get(url, params=parameters)
-        data = et.parse(response.text)
-
-        if response.ok:
-           pass
-        else:
-            if response.status_code == 400:
-               pass
-            else:
-                raise ConnectionError
-
-        return output
+        path ='{}series={}&startDate={}&endDate={}&type=xml&key={}&aggregationTypes={}&Formulas={}&Frequency={}'.format(url,self.series,self.startDate,self.endDate,a.API_KEY,self.aggregationTypes,self.formulas,self.frequency)
+        url_to_open = urllib.request.urlopen(path).read()
+        #tree = ET.fromstring(url_to_open)
+        
+        
+        #url_to_open = urllib.request.urlopen(path).read()
+        #tree = ET.parse(url_to_open)
+        #root_node = tree.getroot()
+        #lst = root_node.findall('TP_DK_USD_A_YTL')  
+        return url_to_open
