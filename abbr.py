@@ -10,29 +10,31 @@ class aggregationTypes(Enum):
  
  
 class formulas(Enum):
-        DUZEY =	0
+        DUZEY =0
         YUZDE_DEGISIM =1
-        FARK =	2
-        YILLIK_YUZDE_DEGISIM =	3
-        YILLIK_FARK =	4
-        BIR_ONCEKI_YILIN_SONUNA_GORE_YUZDE_DEGISIM =	5
-        BIR_ONCEKI_YILIN_SONUNA_GORE_FARK = 6
-        HARAKETLI_ORTALAMA  =	7
-        HARAKETLI_TOPLAM =	8
+        FARK =2
+        YILLIK_YUZDE_DEGISIM =3
+        YILLIK_FARK =4
+        BIR_ONCEKI_YILIN_SONUNA_GORE_YUZDE_DEGISIM =5
+        BIR_ONCEKI_YILIN_SONUNA_GORE_FARK =6
+        HARAKETLI_ORTALAMA  =7
+        HARAKETLI_TOPLAM =8
  
 class frequency(Enum):
-        GUNLUK = 1
-        ISGUNU = 2
-        HAFTALIK = 3
-        AYDA_2_KEZ = 4
-        AYLIK =	5
-        AYLIK_3 = 6
-        AYLIK_6 = 7
-        YILLIK = 8
+        GUNLUK =1
+        ISGUNU =2
+        HAFTALIK =3
+        AYDA_2_KEZ =4
+        AYLIK =5
+        AYLIK_3 =6
+        AYLIK_6 =7
+        YILLIK =8
  
 class series(Enum):
         USD_ALIS = 'TP.DK.USD.A.YTL'
+        USD_SATIS = 'TP.DK.USD.S.YTL'
         EURO_ALIS = 'TP.DK.EUR.A.YTL'
+        EURO_SATIS = 'TP.DK.EUR.S.YTL'
         ORT_MEVDUAT_FAIZ_ORANI_1AY='TP.TRY.MT01'
         ORT_MEVDUAT_FAIZ_ORANI_3AY='TP.TRY.MT02'
         ORT_IHTIYAC_FAIZ_ORANI ='TP.KTF10'

@@ -43,11 +43,12 @@ class My_Manager:
         url_to_open = urllib.request.urlopen(path).read()
         data = json.loads(url_to_open)
         
+        new_series = self.series.replace('.','_')
         for i in data['items']:
-            if i[self.series] == None:
+            if i[new_series] == None:
                 continue
             temp['Time'] = self.convertTime(i['UNIXTIME']['$numberLong'])
-            temp['Value'] = i[self.series]
+            temp['Value'] = i[new_series]
             print('{} :  {}'.format( temp['Time'], temp['Value']))
     
         #df = pd.DataFrame.from_dict(temp, orient='index')
