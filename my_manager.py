@@ -8,6 +8,9 @@ import pandas as pd
 
 from datetime import datetime
 import numpy as np
+import openpyxl
+import os
+
 
 
 series = None
@@ -44,7 +47,6 @@ class My_Manager:
         data = json.loads(url_to_open)
         
         new_series = self.series.replace('.','_') #URL'deki seri adı ile JSON sonuçundaki seri adı farklı geliyor.
-        temp_list = [[], []]
         for i in data['items']:
             if i[new_series] == None:
                 continue
@@ -52,18 +54,39 @@ class My_Manager:
             #temp['Time'] = (i['Tarih'])
             #temp['Value'] = i[new_series]
             temp[i['Tarih']] = i[new_series]
-            #temp_list[0].append(i['Tarih'])
-            #temp_list[1].append(i[new_series])
             #my_np =np.array([[temp['Time']], [temp['Value']]])
-            #print('{} :  {}'.format( temp['Time'], temp['Value']))
-            #print('{} : {}'.format(temp_list[0][i],temp_list[1][i]))
             
-        for x, y in temp.items():
-            print(x, y)
+        #for x, y in temp.items():
+        #    print(x, y)
   
-         
+        
+        return temp
+        
+    def exportToExcel(self,data):
+        wb = openpyxl.Workbook()
+        sheet = wb.active
+        sheet.delete_rows(idx=1)
+        tempRow = 1
+        for x in data.keys():
+             tempCell = sheet.cell(row = tempRow, column = 1)
+             tempCell.value = x
+             tempRow += 1
+             
+        tempRow = 1     
+        for y in data.values():
+             tempCell = sheet.cell(row = tempRow, column = 2)
+             tempCell.value = y
+             tempRow += 1
+          
+        path = os.path.abspath(os.getcwd()) + "\\result.xlsx"
+        wb.save(path)
+       
+        
+  
         
         
+        
+            
         
         
         #if url_to_open.ok:
