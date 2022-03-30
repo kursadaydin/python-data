@@ -44,16 +44,14 @@ class My_Manager:
         data = json.loads(url_to_open)
         
         for i in data['items']:
-            if i['TP_DK_EUR_A_YTL'] == None:
+            if i[self.series] == None:
                 continue
-            tempTime = self.convertTime(i['UNIXTIME']['$numberLong'])
-            tempValue = i['TP_DK_EUR_A_YTL']
-            temp['Time']= tempTime
-            temp['Value'] = tempValue
-            #print('{} :  {}'.format( tempTime, tempValue))
+            temp['Time'] = self.convertTime(i['UNIXTIME']['$numberLong'])
+            temp['Value'] = i[self.series]
+            print('{} :  {}'.format( temp['Time'], temp['Value']))
     
-        df = pd.DataFrame.from_dict(temp, orient='index')
-        print(df)
+        #df = pd.DataFrame.from_dict(temp, orient='index')
+        #print(df)
         
         
         #if url_to_open.ok:

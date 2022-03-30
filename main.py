@@ -6,7 +6,7 @@ import abbr as a
 
 if __name__ == '__main__':
     
-    dolar_alis = a.EURO_ALIS
+    dolar_alis = a.series.USD_ALIS.value
     startDate ='01-01-2020'
     endDate ='01-03-2021'
     formulas = a.formulas.FARK.value
